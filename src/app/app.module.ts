@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { CollapseModule } from 'ngx-bootstrap';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -10,6 +11,7 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
+    CollapseModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpModule

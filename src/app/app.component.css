@@ -1,0 +1,61 @@
+.menu-bur {
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    top: 0px;
+    background-image: url('/assets/system/sidebar.jpg');
+}
+
+.menu-bur .menu-head {
+    line-height: 50px;
+    padding: 0px 20px;
+}
+
+.menu-bur .content {
+    height: 100%;
+    width: 100%;
+}
+
+.menu-bur .line {
+    height: 0.5px;
+    background-color: rgba(255, 255, 25, 0.2);
+    width: 90%;
+    margin: auto;
+}
+
+.menu-bur .menu-block {
+    padding: 0px 20px;
+}
+
+.menu-bur .menu-block img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-bur .menu-block span {
+    margin-left: 20px;
+    line-height: 50px;
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-bur .menu-block i {
+    position: absolute;
+    right: 20px;
+    line-height: 50px;
+}
+
+.menu-bur .menu-block-list div {
+    padding-left: 30px;
+    line-height: 40px;
+    color: white;
+}
+
+.menu-bur .menu-block-list div:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.menu-bur .menu-block-list span {
+    padding-left: 30px;
+}

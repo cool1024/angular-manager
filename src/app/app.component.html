@@ -1,3 +1,32 @@
-<h1>
-  {{title}}
-</h1>
+<div class="spinner">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+</div>
+<button type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed">Toggle collapse</button>
+<div class="menu-bur">
+    <div class="content bg">
+        <h5 class="menu-head"><i class="fa fa-yelp"></i> Angular Manager</h5>
+        <div class="line"></div>
+        <div class="menu-block">
+            <img src="/assets/system/photo.jpg" />
+            <span>Koro Miko </span>
+            <i class="fa fa-caret-down"></i>
+        </div>
+        <div class="menu-block-list">
+            <a href="#">
+                <div><i class="fa  fa-user-md"></i> <span>My Account</span></div>
+            </a>
+            <a href="#">
+                <div><i class="fa  fa-info-circle"></i> <span>About Me</span></div>
+            </a>
+            <a href="#">
+                <div><i class="fa  fa-sign-out"></i> <span>Sign Out</span></div>
+            </a>
+        </div>
+        <div class="menu-block">
+            <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed" class="card card-block card-header">
+                <div class="well well-lg">Some content</div>
+            </div>
+        </div>
+    </div>
+</div>
