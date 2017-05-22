@@ -113,3 +113,12 @@ body {
         transform: rotate(90deg);
     }
 }
+
+@font-face {
+    font-family: GoogleFont;
+    src: url('/assets/font/NotoSansHans-Thin-Windows.otf');
+}
+
+* {
+    font-family: GoogleFont;
+}
