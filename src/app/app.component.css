@@ -1,14 +1,22 @@
 .menu-bur {
     position: fixed;
     height: 100%;
-    width: 250px;
+    width: 280px;
     top: 0px;
     background-image: url('/assets/system/sidebar.jpg');
+    user-select: none;
+    z-index: 1000;
 }
 
 .menu-bur .menu-head {
-    line-height: 50px;
+    line-height: 60px;
     padding: 0px 20px;
+}
+
+.menu-bur .menu-head i {
+    display: inline-block;
+    padding: 10px;
+    width: 30px;
 }
 
 .menu-bur .content {
@@ -16,15 +24,14 @@
     width: 100%;
 }
 
-.menu-bur .line {
-    height: 0.5px;
-    background-color: rgba(255, 255, 25, 0.2);
-    width: 90%;
-    margin: auto;
-}
-
 .menu-bur .menu-block {
     padding: 0px 20px;
+    line-height: 60px;
+    cursor: pointer;
+}
+
+.menu-bur .menu-block:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .menu-bur .menu-block img {
@@ -35,21 +42,32 @@
 }
 
 .menu-bur .menu-block span {
-    margin-left: 20px;
-    line-height: 50px;
+    margin-left: 10px;
     text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-bur .menu-block label {
+    margin-left: 10px;
+    font-size: 20px;
+    display: inline-block;
+    width: 30px;
 }
 
 .menu-bur .menu-block i {
     position: absolute;
-    right: 20px;
-    line-height: 50px;
+    right: 40px;
+    line-height: 60px;
 }
 
 .menu-bur .menu-block-list div {
-    padding-left: 30px;
-    line-height: 40px;
+    padding-left: 20px;
+    line-height: 50px;
     color: white;
+}
+
+.menu-bur .menu-block-list i {
+    display: inline-block;
+    width: 20px;
 }
 
 .menu-bur .menu-block-list div:hover {
@@ -58,4 +76,117 @@
 
 .menu-bur .menu-block-list span {
     padding-left: 30px;
+}
+
+.manager-content {
+    width: 100%;
+    margin-left: 280px;
+    position: absolute;
+    top: 0px;
+    /*background-color: white;*/
+    padding-left: 20px;
+}
+
+.manager-content .top-menu {
+    height: 70px;
+    width: 100%;
+}
+
+.manager-content .left-tool-button {
+    position: absolute;
+    left: 20px;
+    top: 0;
+    height: 100%;
+    width: 300px;
+    padding: 10px 0px;
+}
+
+.manager-content .left-tool-button .circle-button {
+    float: left;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    box-shadow: 1px 2px 12px #e4e4e4;
+    background-color: white;
+}
+
+.manager-content .circle-text {
+    float: left;
+    line-height: 50px;
+    padding-left: 20px;
+}
+
+.manager-content .right-tool-bur {
+    position: absolute;
+    top: 0;
+    right: 135px;
+    height: 100%;
+    width: 600px;
+    padding: 10px 0px;
+}
+
+.manager-content .right-tool-bur .input-list {
+    float: left;
+    width: 200px;
+    height: 100%;
+}
+
+.manager-content .right-tool-bur .input-list input {
+    height: 50px;
+    width: 200px;
+    border-style: none;
+    border-bottom: 1px solid #cbcbcb;
+    background-color: transparent;
+    transition: border-bottom 1s ease-out;
+}
+
+.manager-content .right-tool-bur .input-list input:focus {
+    border-bottom: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+.manager-content .right-tool-bur .circle-button {
+    float: left;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    box-shadow: 1px 2px 12px #e4e4e4;
+    background-color: white;
+}
+
+.manager-content .right-tool-bur ul {
+    float: left;
+    list-style: none;
+    padding-top: 10px;
+    width: 200px;
+    height: 50px;
+}
+
+.manager-content .right-tool-bur ul li {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.view-pad {
+    position: absolute;
+    right: 280px;
+    width: 100%;
+    height: 400px;
+    padding-left: 300px;
+    padding-right: 40px;
+    padding-top: 40px;
+}
+
+.hover-button {
+    transition: background-color 1s ease-out, color 1s ease-out;
+}
+
+.hover-button:hover {
+    background-color: rgba(255, 0, 0, 0.25);
+    color: white;
 }

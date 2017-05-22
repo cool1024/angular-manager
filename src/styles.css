@@ -59,8 +59,19 @@
 }
 
 .bg {
-    background-color: rgba(233, 46, 46, 0.65);
+    background-color: rgba(255, 0, 0, 0.61);
     color: white;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+.line {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 90%;
+    margin: auto;
 }
 
 a,
@@ -70,6 +81,35 @@ select {
     outline: 0 none !important;
 }
 
+a:link {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none
+}
+
 a:hover {
     text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+body {
+    background-color: #f3f3f3;
+}
+
+.icon-up {
+    animation: icon-up 2s linear;
+}
+
+@keyframes icon-up {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(90deg);
+    }
 }

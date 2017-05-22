@@ -1,18 +1,13 @@
-<div class="spinner">
-    <div class="double-bounce1"></div>
-    <div class="double-bounce2"></div>
-</div>
-<button type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed">Toggle collapse</button>
 <div class="menu-bur">
     <div class="content bg">
         <h5 class="menu-head"><i class="fa fa-yelp"></i> Angular Manager</h5>
         <div class="line"></div>
-        <div class="menu-block">
+        <div class="menu-block" (click)="isCollapsed=!isCollapsed">
             <img src="/assets/system/photo.jpg" />
             <span>Koro Miko </span>
-            <i class="fa fa-caret-down"></i>
+            <i class="fa fa-caret-down" [ngClass]="{'icon-up':isCollapsed}"></i>
         </div>
-        <div class="menu-block-list">
+        <div class="menu-block-list" *ngIf="isCollapsed">
             <a href="#">
                 <div><i class="fa  fa-user-md"></i> <span>My Account</span></div>
             </a>
@@ -23,10 +18,56 @@
                 <div><i class="fa  fa-sign-out"></i> <span>Sign Out</span></div>
             </a>
         </div>
+        <div class="line"></div>
         <div class="menu-block">
-            <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed" class="card card-block card-header">
-                <div class="well well-lg">Some content</div>
-            </div>
+            <label class="fa   fa-modx"></label>
+            <span>Modules </span>
+            <i class="fa fa-caret-down"></i>
         </div>
+        <div class="menu-block">
+            <label class="fa fa-th"></label>
+            <span>Component </span>
+            <i class="fa fa-caret-down"></i>
+        </div>
+        <div class="menu-block">
+            <label class="fa fa-paper-plane-o"></label>
+            <span>Pipe </span>
+            <i class="fa fa-caret-down"></i>
+        </div>
+        <div class="menu-block">
+            <label class="fa fa-paint-brush"></label>
+            <span>Router </span>
+            <i class="fa fa-caret-down"></i>
+        </div>
+        <div class="menu-block">
+            <label class="fa fa-podcast"></label>
+            <span>Animations </span>
+            <i class="fa fa-caret-down"></i>
+        </div>
+        <div class="menu-block">
+            <label class="fa fa-reddit-alien"></label>
+            <span>Attribute Directives  </span>
+            <i class="fa fa-caret-down"></i>
+        </div>
+    </div>
+</div>
+<div class="manager-content">
+    <div class="top-menu">
+        <div class="left-tool-button">
+            <div class="circle-button text-center"><i class="fa  fa-navicon"></i></div>
+            <h5 class="circle-text"> Dashboard</h5>
+        </div>
+        <div class="right-tool-bur">
+            <div class="input-list"><input type="search" /></div>
+            <div class="circle-button text-center"><i class="fa fa-search"></i></div>
+            <ul>
+                <li class="text-center hover-button"><i class="fa fa-th-list"></i></li>
+                <li class="text-center hover-button"><i class="fa fa-bell"></i></li>
+                <li class="text-center hover-button"><i class="fa fa-cog"></i></li>
+            </ul>
+        </div>
+    </div>
+    <div class="view-pad">
+        <router-outlet></router-outlet>
     </div>
 </div>
