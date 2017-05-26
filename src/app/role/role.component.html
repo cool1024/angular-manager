@@ -1,0 +1,198 @@
+<ol class="breadcrumb text-primary rounded-0">
+    <li> <a routerLink="" class="fa fa-home"> 首页 </a></li>
+    <li> <a class="fa fa-users"> 角色管理 </a></li>
+</ol>
+<br>
+<div class="row">
+    <div class="col-sm">
+        <div class="card rounded-0 border-0" style="padding:10px 10px;">
+            <h4><i class="fa fa-users ml-2"></i> 角色列表 <button class="btn btn-outline-success ml-2 pointer" (click)="showAddPad(add)"><i class="fa fa-plus"></i> 添加角色</button></h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="border-0">ID</th>
+                        <th class="border-0">角色名称</th>
+                        <th class="border-0">创建时间</th>
+                        <th class="border-0">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>超级管理员</td>
+                        <td>2017-05-25 17:16:45</td>
+                        <td>
+                            <span class="text-info pointer mr-2" (click)="showChangePad(update)"><i class="fa fa-info"></i> 详情</span>
+                            <span class="text-danger pointer ml-2" (click)="removeRole()"><i class="fa fa-remove"></i> 删除</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>平台管理员</td>
+                        <td>2017-05-25 17:22:14</td>
+                        <td>
+                            <span class="text-info pointer mr-2" (click)="showChangePad(update)"><i class="fa fa-info"></i> 详情</span>
+                            <span class="text-danger pointer ml-2" (click)="showChangePad(update)"><i class="fa fa-remove"></i> 删除</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<ng-template #add let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">添加角色</h5>
+        <button type="button" class="close text-danger" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm">
+            <form (ngSubmit)="addRole();c('Cross click');" #addForm="ngForm">
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label">角色名称</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" value="请输入用户名" id="example-text-input">
+                    </div>
+                </div>
+                <span>权限分配</span>
+                <br><br>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </span>
+                            <input value="菜单管理" type="text" class="form-control" aria-label="Text input with checkbox" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </span>
+                            <input value="权限管理" type="text" class="form-control" aria-label="Text input with checkbox" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </span>
+                            <input value="角色管理" type="text" class="form-control" aria-label="Text input with checkbox" readonly>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </span>
+                            <input value="菜单管理" type="text" class="form-control" aria-label="Text input with checkbox" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </span>
+                            <input value="权限管理" type="text" class="form-control" aria-label="Text input with checkbox" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </span>
+                            <input value="角色管理" type="text" class="form-control" aria-label="Text input with checkbox" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <button class="btn btn-outline-success" [disabled]="!addForm.form.valid">确认添加</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
+<ng-template #update let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">修改角色</h5>
+        <button type="button" class="close text-danger" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm">
+            <form (ngSubmit)="addRole();c('Cross click');" #addForm="ngForm">
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label">角色名称</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" value="请输入用户名" id="example-text-input">
+                    </div>
+                </div>
+                <span>权限分配</span>
+                <br><br>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </span>
+                            <input value="菜单管理" type="text" class="form-control" aria-label="Text input with checkbox" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </span>
+                            <input value="权限管理" type="text" class="form-control" aria-label="Text input with checkbox" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </span>
+                            <input value="角色管理" type="text" class="form-control" aria-label="Text input with checkbox" readonly>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </span>
+                            <input value="菜单管理" type="text" class="form-control" aria-label="Text input with checkbox" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </span>
+                            <input value="权限管理" type="text" class="form-control" aria-label="Text input with checkbox" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </span>
+                            <input value="角色管理" type="text" class="form-control" aria-label="Text input with checkbox" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <button class="btn btn-outline-success" [disabled]="!addForm.form.valid">确认修改</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,107 @@
+<ol class="breadcrumb text-primary">
+    <li> <a routerLink="" class="fa fa-home"> 首页 </a></li>
+    <li> <a class="fa fa-lock"> 权限管理 </a></li>
+</ol>
+<br>
+<div class="row" *ngFor="let item of permissions">
+    <div class="col-sm">
+        <div class="card permission rounded-0">
+            <div class="card-block">
+                <a><i class="fa fa-align-left muted"></i> {{item.menu_name}}</a>
+                <span class="pull-right" (click)="showAddPad(item,content)"><i class="fa fa-plus"></i></span>
+                <!--<div class="line"></div>-->
+            </div>
+            <div class="card-block">
+                <div class="btn-group mr-2" role="group" *ngFor="let permission of item.permissions">
+                    <button type="button" class="btn btn-outline-secondary" (click)="showChangePad(item,permission,change)">{{permission.title}}</button>
+                    <button type="button" class="btn btn-outline-secondary" (click)="removePermission(item,permission)"><i class="fa fa-remove"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm">
+        <div class="permission text-right rounded-0">
+            <button class="btn btn-success" (click)="confirmPermission()">确认修改</button>
+        </div>
+    </div>
+</div>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">添加权限</h5>
+        <button type="button" class="close text-danger" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form (ngSubmit)="addPermission();c('Cross click');" class="col-sm" #addForm="ngForm">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">权限名</button>
+                </span>
+                <input type="text" class="form-control" placeholder="请输入权限名" aria-label="请输入权限名" #add_name="ngModel" [(ngModel)]="permission.title" name="add_name" required>
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">子菜单</button>
+                </span>
+                <select class="custom-select rounded-0" style="border-bottom-right-radius: .25rem;border-top-right-radius: .25rem;width: 100%;" id="inlineFormCustomSelect" [(ngModel)]="permission.child_menuid" #add_child="ngModel" name="add_child" required>
+                    <option *ngFor="let menu of permissionArray.child_menus" value="{{menu.id}}">{{menu.title}}</option>
+                </select>
+                <!--<input type="text" class="form-control" placeholder="请输入子菜单" aria-label="请输入图标的类名" #change_child="ngModel" [(ngModel)]="permission.child_menuid" name="change_child" required>-->
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">关键词</button>
+                </span>
+                <input type="text" class="form-control" placeholder="请输入关键词" aria-label="请输入关键词" #add_key="ngModel" [(ngModel)]="permission.key" name="add_key" required>
+            </div>
+            <br>
+            <div class="text-right">
+                <button class="btn btn-outline-success" [disabled]="!addForm.form.valid">确认添加</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+<ng-template #change let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">修改权限</h5>
+        <button type="button" class="close text-danger" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form (ngSubmit)="changePermission();c('Cross click');" class="col-sm" #addForm="ngForm">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">权限名</button>
+                </span>
+                <input type="text" class="form-control" placeholder="请输入权限名" aria-label="请输入权限名" #add_title="ngModel" [(ngModel)]="permission.title" name="change_title" required>
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">子菜单</button>
+                </span>
+                <select class="custom-select rounded-0" style="border-bottom-right-radius: .25rem;border-top-right-radius: .25rem;width: 100%;" id="inlineFormCustomSelect" #change_menu="ngModel" [(ngModel)]="permission.child_menuid" name="change_menu" required>
+                    <option *ngFor="let menu of permissionArray.child_menus" value="{{menu.id}}">{{menu.title}}</option>
+                </select>
+                <!--<input type="text" class="form-control" placeholder="请输入子菜单" aria-label="请输入图标的类名" #change_child="ngModel" [(ngModel)]="permission.child_menuid" name="change_child" required>-->
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">关键词</button>
+                </span>
+                <input type="text" class="form-control" placeholder="请输入关键词" aria-label="请输入关键词" #change_key="ngModel" [(ngModel)]="permission.key" name="change_key" required>
+            </div>
+            <br>
+            <div class="text-right">
+                <button type="submit" class="btn btn-outline-success" [disabled]="!addForm.form.valid">确认修改</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

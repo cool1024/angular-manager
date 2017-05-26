@@ -1,0 +1,24 @@
+.permission {
+    width: 700px;
+    margin-bottom: 20px;
+}
+
+.permission-card {
+    width: 200px;
+    height: 50px;
+    display: inline-block;
+    line-height: 50px;
+    margin: 10px;
+    border: 1px solid #f0f0f0;
+}
+
+.permission-card i {
+    line-height: 50px;
+    padding-right: 5px;
+}
+
+.line {
+    width: 100%;
+    background-color: rgba(143, 143, 143, 0.2);
+    margin-top: 10px;
+}

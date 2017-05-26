@@ -68,6 +68,8 @@
 .menu-bur .menu-block-list i {
     display: inline-block;
     width: 20px;
+    padding-left: 10px;
+    font-size: 20px;
 }
 
 .menu-bur .menu-block-list div:hover {
@@ -80,11 +82,9 @@
 
 .manager-content {
     width: 100%;
-    margin-left: 280px;
+    padding-left: 280px;
     position: absolute;
     top: 0px;
-    /*background-color: white;*/
-    padding-left: 20px;
 }
 
 .manager-content .top-menu {
@@ -93,12 +93,10 @@
 }
 
 .manager-content .left-tool-button {
-    position: absolute;
-    left: 20px;
-    top: 0;
     height: 100%;
     width: 300px;
     padding: 10px 0px;
+    margin-left: 20px;
 }
 
 .manager-content .left-tool-button .circle-button {
@@ -120,9 +118,8 @@
 .manager-content .right-tool-bur {
     position: absolute;
     top: 0;
-    right: 135px;
+    right: 0;
     height: 100%;
-    width: 600px;
     padding: 10px 0px;
 }
 
@@ -174,7 +171,7 @@
 
 .view-pad {
     position: absolute;
-    right: 280px;
+    right: 0;
     width: 100%;
     height: 400px;
     padding-left: 300px;
