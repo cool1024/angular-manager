@@ -1,21 +1,21 @@
-<div class="menu-bur">
-    <div class="content bg">
-        <h5 class="menu-head"><i class="fa fa-yelp"></i> Angular Manager</h5>
+<div class="menu-bur" *ngIf="isMenuPadShow">
+    <div class="content" [ngStyle]="{'background-color': config.bg_color,'color':config.font_color}">
+        <h5 class="menu-head"><i class="{{config.ico}}"></i> {{config.title}}</h5>
         <div class="line"></div>
         <div class="menu-block" (click)="isCollapsed[0]=!isCollapsed[0]">
-            <img src="/assets/system/photo.jpg" />
-            <span>Koro Miko </span>
+            <img src="{{admin.thumb?source+admin.thumb:'/assets/system/photo.jpg'}}" />
+            <span>{{admin.account}}</span>
             <i class="fa fa-caret-down" [ngClass]="{'icon-up':isCollapsed[0],'icon-down':!isCollapsed[0]}"></i>
         </div>
         <div class="menu-block-list" *ngIf="isCollapsed[0]">
             <a>
-                <div><i class="fa  fa-user-md"></i> <span>My Account</span></div>
+                <div><i class="fa  fa-user-md"></i> <span>超级管理员</span></div>
             </a>
             <a href="#">
-                <div><i class="fa  fa-info-circle"></i> <span>About Me</span></div>
+                <div><i class="fa  fa-info-circle"></i> <span>账户设置</span></div>
             </a>
             <a href="#">
-                <div><i class="fa  fa-sign-out"></i> <span>Sign Out</span></div>
+                <div><i class="fa  fa-sign-out"></i> <span>退出登入</span></div>
             </a>
         </div>
         <div class="line"></div>
@@ -34,7 +34,7 @@
     </div>
 </div>
 <div class="manager-content">
-    <div class="top-menu">
+    <div class="top-menu" *ngIf="isMenuPadShow">
         <div class="left-tool-button">
             <div class="circle-button text-center"><i class="fa  fa-navicon"></i></div>
             <h5 class="circle-text"> Dashboard</h5>
@@ -45,12 +45,12 @@
             <ul>
                 <li class="text-center hover-button"><i class="fa fa-th-list"></i></li>
                 <li class="text-center hover-button"><i class="fa fa-bell"></i></li>
-                <li class="text-center hover-button" placement="left" [ngbPopover]="popContent" #p="ngbPopover"><i class="fa fa-cog"></i></li>
-                <ng-template #popContent>
-                    <h6><a routerLink="menu" (click)="p.close()">菜单设置</a></h6>
-                    <h6><a routerLink="permission" (click)="p.close()">权限管理</a></h6>
-                    <h6><a routerLink="admin" (click)="p.close()">用户管理</a></h6>
-                </ng-template>
+                <li class="text-center hover-button" [mdMenuTriggerFor]="appMenu"><i class="fa fa-cog"></i></li>
+                <md-menu #appMenu="mdMenu">
+                    <button md-menu-item routerLink="menu"><i class="fa fa-list"></i> 菜单设置</button>
+                    <button md-menu-item routerLink="permission"><i class="fa fa-lock"></i> 权限管理</button>
+                    <button md-menu-item routerLink="admin"><i class="fa fa-users"></i> 用户管理</button>
+                </md-menu>
             </ul>
         </div>
     </div>

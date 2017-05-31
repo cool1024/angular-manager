@@ -11,4 +11,12 @@ export class Storage {
         localStorage.setItem('account', data.account);
         localStorage.setItem('token', data.token);
     }
+
+    public static checkToken(): boolean {
+        return localStorage.getItem('account') && localStorage.getItem('token') ? true : false;
+    }
+
+    public static cleanToken(): void {
+        localStorage.clear();
+    }
 }

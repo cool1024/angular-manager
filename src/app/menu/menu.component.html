@@ -9,13 +9,13 @@
             <div class="card-block">
                 <h5 class="card-title">系统菜单</h5>
                 <p class="card-text">
-                    <template #itemTemplate let-item="item" let-index="index">
+                    <ng-template #itemTemplate let-item="item" let-index="index">
                         <i class="{{item.value.ico}}"></i>
                         <span>{{item.value.title}}</span>
                         <label class="fa fa-edit text-primary" (click)="showChangePad(item.value,change)"></label>
                         <s class="fa fa-plus text-success" (click)="showMenuPad(item.value,child)"></s>
                         <b class="fa fa-remove text-danger" (click)="removeMenuItem(index)"></b>
-                    </template>
+                    </ng-template>
                     <bs-sortable [(ngModel)]="menus" [itemTemplate]="itemTemplate" itemClass="sort-item btn border-0 text-left" itemActiveClass="" placeholderItem=新菜单 placeholderClass="card btn btn-outline-info" wrapperClass=""></bs-sortable>
                 </p>
                 <hr>

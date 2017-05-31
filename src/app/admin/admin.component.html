@@ -25,17 +25,7 @@
                         <td>{{item.createtime}}</td>
                         <td>
                             <span class="text-info pointer mr-2" (click)="showChangePad(update)"><i class="fa fa-info"></i> 详情</span>
-                            <span class="text-danger pointer ml-2" (click)="removeRole()"><i class="fa fa-remove"></i> 删除</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>admin</td>
-                        <td>超级管理员</td>
-                        <td>2017-05-25 20:04:15</td>
-                        <td>
-                            <span class="text-info pointer mr-2" (click)="showChangePad(update)"><i class="fa fa-info"></i> 详情</span>
-                            <span class="text-danger pointer ml-2" (click)="removeRole()"><i class="fa fa-remove"></i> 删除</span>
+                            <span class="text-danger pointer ml-2" (click)="removeAdmin(item)"><i class="fa fa-remove"></i> 删除</span>
                         </td>
                     </tr>
                 </tbody>
@@ -52,7 +42,7 @@
     </div>
     <div class="modal-body">
         <div class="col-sm">
-            <form (ngSubmit)="addRole();c('Cross click');" #addForm="ngForm">
+            <form (ngSubmit)="addAdmin();c('Cross click');" #addForm="ngForm">
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">账号</label>
                     <div class="col-10">

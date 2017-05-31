@@ -11,8 +11,6 @@ import { PermissionService } from './permission.service';
 })
 export class PermissionComponent implements OnInit {
 
-  public items=[1,2,3,4];
-
   constructor(private modalService: NgbModal, public http: Http, private service: PermissionService) { }
 
   ngOnInit() {

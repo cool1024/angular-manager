@@ -1,0 +1,29 @@
+<div class="row fixed-top login-window">
+    <div class="card rounded-0 login-card border-0">
+        <div class="login-card-left bg">
+            <h3 class="text-center">Anas权限管理平台</h3>
+            <h5 class="text-center">版本 1.0.0</h5>
+            <h6 class="text-center">2017-05-28</h6>
+        </div>
+        <div class="card-block">
+            <h4 class="card-title"><i class="fa fa-user-circle-o"></i> 管理员登入</h4>
+            <p class="text-muted"><small>请输入管理员账号密码</small><small class="text-danger">{{message}}</small></p>
+            <form (ngSubmit)="doLogin()" #loginForm="ngForm">
+                <div class="input-group">
+                    <span class="input-group-addon rounded-0" id="sizing-addon2">账号</span>
+                    <input type="text" name="login_account" #login_account="ngModel" [(ngModel)]="admin.account" required class="form-control rounded-0" placeholder="管理员账号" aria-label="Username" aria-describedby="sizing-addon2">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon rounded-0" id="sizing-addon2">密码</span>
+                    <input type="password" name="login_password" #login_password="ngModel" [(ngModel)]="admin.password" required class="form-control rounded-0" id="inputHorizontalWarning" placeholder="管理员密码">
+                </div>
+                <br>
+                <p class="card-text">
+                    <button class="btn btn-info" type="submit" [disabled]="!loginForm.form.valid" md-raised-button style="background-color:#5bc0de;color:white;box-shadow:none;"><i class="fa fa-sign-in"></i> 登入</button>
+                    <span class="pull-right">忘记密码？</span>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>

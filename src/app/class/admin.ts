@@ -7,4 +7,6 @@ export class Admin {
         this.role = role || new Role();
         this.createtime = createtime || (new Date().toDateString());
     }
+    //附加字段
+    public thumb:string = "";
 }

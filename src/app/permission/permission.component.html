@@ -1,4 +1,4 @@
-<ol class="breadcrumb text-primary">
+<ol class="breadcrumb text-primary rounded-0">
     <li> <a routerLink="" class="fa fa-home"> 首页 </a></li>
     <li> <a class="fa fa-lock"> 权限管理 </a></li>
 </ol>
@@ -13,8 +13,8 @@
             </div>
             <div class="card-block">
                 <div class="btn-group mr-2" role="group" *ngFor="let permission of item.permissions">
-                    <button type="button" class="btn btn-outline-secondary" (click)="showChangePad(item,permission,change)">{{permission.title}}</button>
-                    <button type="button" class="btn btn-outline-secondary" (click)="removePermission(item,permission)"><i class="fa fa-remove"></i></button>
+                    <button type="button" class="btn btn-outline-secondary rounded-0 text-muted" (click)="showChangePad(item,permission,change)">{{permission.title}}</button>
+                    <button type="button" class="btn btn-outline-secondary rounded-0 text-muted" (click)="removePermission(item,permission)"><i class="fa fa-remove"></i></button>
                 </div>
             </div>
         </div>

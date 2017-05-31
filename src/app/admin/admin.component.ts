@@ -2,14 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Admin } from "./../class/admin";
 import { Role } from "./../class/role";
+import{AdminService} from './admin.service';
+import{RoleService} from './../role/role.service';
+import { Http } from '@angular/http';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
+  providers:[AdminService,RoleService]
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal,private service:AdminService,private roleService:RoleService ,public http:Http) { }
 
   ngOnInit() {
     let that=this;
@@ -18,10 +22,20 @@ export class AdminComponent implements OnInit {
     this.admins=new Array<Admin>();
 
     //载入角色列表
-
+    this.roleService.roles(this.http,datas=>{
+      let that=this;
+      this.roles=new Array<Role>();
+      datas.forEach(element => {
+        that.roles.push(element);
+      });
+    });
+    
     //载入账户列表
-    that.admins.push(new Admin(1,'admin','123456789',new Role()));
+    that.admins.push(new Admin(1,'admin','123456789',new Role(0,"超级管理员")));
   }
+
+  //角色列表
+  public roles:Role[];
 
   //处于活跃状态的admin
   public admin: Admin;
@@ -52,11 +66,13 @@ export class AdminComponent implements OnInit {
 
   //添加账号
   addAdmin(){
-    this.admins.push(new Admin(this.temp.id,this.temp.account,this.temp.password,this.temp.role));
+    this.service.add(this.http,this.temp,()=>{
+      this.admins.push(new Admin(this.temp.id,this.temp.account,this.temp.password,this.temp.role));
+    },msg=>{});
   }
 
   //修改账号
   changeAdmin(){
-    this.admin=
+    
   }
 }
