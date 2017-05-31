@@ -1,13 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdButtonModule, MdMenuModule,MdGridListModule,MdCheckboxModule } from '@angular/material';
+import { MdButtonModule, MdMenuModule, MdGridListModule, MdCheckboxModule } from '@angular/material';
 import 'hammerjs';
 import { SortableModule } from 'ngx-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { CenterComponent } from './center/center.component';
 import { MenuComponent } from './menu/menu.component';
@@ -38,6 +40,7 @@ import { LoginComponent } from './login/login.component';
     ]),
     NgbModule.forRoot(),
     SortableModule.forRoot(),
+    ToastrModule.forRoot({ timeOut: 1000, positionClass: 'toast-bottom-right' }),
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -45,7 +48,8 @@ import { LoginComponent } from './login/login.component';
     MdButtonModule,
     MdMenuModule,
     MdGridListModule,
-    MdCheckboxModule
+    MdCheckboxModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

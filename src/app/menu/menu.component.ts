@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Http } from '@angular/http';
+import { ToastrService } from 'ngx-toastr';
 import { Menu } from './../class/menu';
 import { MenuService } from './menu.service';
 @Component({
@@ -110,9 +111,8 @@ export class MenuComponent implements OnInit {
 
   //还原菜单
   resetMenu(): void {
-    let service = new MenuService();
     let menus: Menu[] = new Array<Menu>();
-    service.menus(this.http, datas => {
+    this.service.menus(this.http, datas => {
       datas.forEach(function (e) {
         menus.push(new Menu(e.mainmenu.title, e.mainmenu.ico, e.mainmenu.url, e.level, e.childmenulist));
       });

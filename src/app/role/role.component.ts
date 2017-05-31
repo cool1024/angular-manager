@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { Role } from './../class/role'
 import { Permission, PermissionArray } from './../class/permission'
 import { RoleService } from './role.service'
@@ -56,17 +57,17 @@ export class RoleComponent implements OnInit {
 
   //弹出添加面板
   showAddPad(content: any): void {
-    this.temp=new Role();
+    this.temp = new Role();
     this.modalService.open(content, { size: 'lg' }).result.then(result => { }, reason => { });
   }
 
   //添加角色
-  addRole():void{
+  addRole(): void {
     console.log(this.temp);
   }
 
   //权限设置
-  permissionSet($event:any){
+  permissionSet($event: any) {
     this.temp.checkbox($event);
   }
 }

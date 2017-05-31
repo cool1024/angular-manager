@@ -179,8 +179,7 @@ body {
 }
 
 .breadcrumb {
-    position: absolute;
-    top: 0px;
+    display: inline-block;
 }
 
 .breadcrumb li::after {

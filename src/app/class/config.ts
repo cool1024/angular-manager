@@ -1,9 +1,9 @@
 export class Config {
 
     //服务器地址
-    public static SERVER_URL = "http://192.168.0.122";
+    public static SERVER_URL = "http://www.zswsswh.top";
 
-    public static SOURCE_URL = "http://192.168.0.122";
+    public static SOURCE_URL = "http://www.zswsswh.top";
 
     //系统配置
     public static SYSTEM_SETTING = {

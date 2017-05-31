@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { Permission, PermissionArray } from './../class/permission';
 import { PermissionService } from './permission.service';
+
 @Component({
   selector: 'app-permission',
   templateUrl: './permission.component.html',
   styleUrls: ['./permission.component.css'],
   providers: [PermissionService]
 })
+
 export class PermissionComponent implements OnInit {
 
   constructor(private modalService: NgbModal, public http: Http, private service: PermissionService) { }

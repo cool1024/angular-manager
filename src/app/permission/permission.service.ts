@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { ToastrService } from 'ngx-toastr';
 import { RequestPost, RequestGet, HtmlPost } from './../class/request';
 
 @Injectable()
 export class PermissionService {
 
-  constructor() { }
+  constructor(private toastService: ToastrService) { }
 
   permissions(http: Http, success: Function): void {
-    let reqeust = new RequestGet(http);
-    reqeust.send('/permission/list', {}, json => {
-      json.result ? success(json.datas) : alert(json.message);
+    let request = new RequestGet(http);
+    request.message(this.toastService);
+    request.send('/permission/list', {}, json => {
+      json.result ? success(json.datas) : this.toastService.warning(json.message, "失败消息");
     });
   }
   change(http: Http, params): void {
-    let reqeust = new RequestPost(http);
-    reqeust.send('/permission/change', params, json => {
-       alert(json.message);
-    });
+    let request = new RequestPost(http);
+    request.message(this.toastService);
+    request.send('/permission/change', params, json => this.toastService.info(json.message, "提示消息"));
   }
 }

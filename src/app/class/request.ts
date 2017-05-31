@@ -1,11 +1,15 @@
 import { HttpModule, Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Config } from './config';
 import { Storage } from './storage';
+import { ToastrService } from 'ngx-toastr';
+
 export class RequestPost {
+    private toast: ToastrService;
     constructor(public http: Http, public error?: Function) {
-        this.error = error || function () { alert("请求失败"); };
+        let that = this;
+        this.error = error || function () { that.toast == undefined ? alert("请求失败") : that.toast.error('请求失败', '系统错误'); };
     }
-    send(url: string, params: any, success: Function, final?: Function) {
+    send(url: string, params: any, success: Function, final?: Function): void {
         var final: Function = final || function () { };
         var success: Function = success || function () { };
         let headers = new Headers();
@@ -14,12 +18,17 @@ export class RequestPost {
         let options = new RequestOptions({ headers: headers });
         this.http.post(Config.SERVER_URL + url, params).subscribe(res => { success(res.json()); final() }, res => { this.error(); final(); });
     }
+    message(toast: ToastrService): void {
+        this.toast = toast;
+    }
 }
 export class RequestGet {
+    private toast: ToastrService;
     constructor(public http: Http, public error?: Function) {
-        this.error = error || function () { alert("请求失败"); };
+        let that = this;
+        this.error = error || function () { that.toast == undefined ? alert("请求失败") : that.toast.error('请求失败', '系统错误'); };
     }
-    send(url: string, params: any, success: Function, final?: Function) {
+    send(url: string, params: any, success: Function, final?: Function): void {
         var final: Function = final || function () { };
         var success: Function = success || function () { };
         let headers = new Headers();
@@ -28,7 +37,10 @@ export class RequestGet {
         let options = new RequestOptions({ headers: headers });
         this.http.get(Config.SERVER_URL + url + '?' + this.parse(params), options).subscribe(res => { success(res.json()); final() }, res => { this.error(); final(); });
     }
-    parse(json: any) {
+    message(toast: ToastrService): void {
+        this.toast = toast;
+    }
+    parse(json: any): string {
         var key: any;
         var query: string[] = [];
         for (key in json) {
