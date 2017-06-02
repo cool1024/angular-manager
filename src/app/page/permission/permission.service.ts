@@ -19,12 +19,18 @@ export class PermissionService {
 
   //修改指定权限
   change(permission: Permission, success: Function): void {
-    this.requesterService.update('/permission/change', permission, res => success());
+    this.requesterService.update('/permission/update', permission, res => success());
   }
 
   //添加权限
   add(permission: Permission, success: Function): void {
     this.requesterService.add('/permission/add', permission, res => success(res));
   }
+
+  //删除权限
+  delete(id: number, success: Function): void {
+    this.requesterService.delete('/permission/delete', { id: id }, res => success());
+  }
+
 
 }

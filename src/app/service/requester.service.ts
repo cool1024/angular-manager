@@ -25,19 +25,19 @@ export class RequesterService {
   //修改请求
   update(url: string, params: any, success: Function): void {
     let options: RequestOptions = new RequestOptions(this.getHeaders());
-    this.http.put(url, params, options).subscribe(res => { let json: any = res.json(); if (json.result) { this.toastrService.success(json.message, "操作成功"); success(json); } else { this.toastrService.warning(json.message, "失败消息"); } }, res => { this.toastrService.error("请求失败", "服务器错误"); });
+    this.http.put(Config.SERVER_URL + url, params, options).subscribe(res => { let json: any = res.json(); if (json.result) { this.toastrService.success(json.message, "操作成功"); success(json); } else { this.toastrService.warning(json.message, "失败消息"); } }, res => { this.toastrService.error("请求失败", "服务器错误"); });
   }
 
   //删除请求
   delete(url: string, params: any, success: Function): void {
     let options: RequestOptions = new RequestOptions(this.getHeaders());
-    this.http.delete(url, options).subscribe(res => { let json: any = res.json(); if (json.result) { this.toastrService.success(json.message, "操作成功"); success(json); } else { this.toastrService.warning(json.message, "失败消息"); } }, res => { this.toastrService.error("请求失败", "服务器错误"); });
+    this.http.delete(Config.SERVER_URL + url + '?' + this.parse(params), options).subscribe(res => { let json: any = res.json(); if (json.result) { this.toastrService.success(json.message, "操作成功"); success(json); } else { this.toastrService.warning(json.message, "失败消息"); } }, res => { this.toastrService.error("请求失败", "服务器错误"); });
   }
 
   //添加请求
   add(url: string, params: any, success: Function) {
     let options: RequestOptions = new RequestOptions(this.getHeaders());
-    this.http.post(url, params, options).subscribe(res => { let json: any = res.json(); if (json.result) { this.toastrService.success(json.message, "操作成功"); success(json); } else { this.toastrService.warning(json.message, "失败消息"); } }, res => { this.toastrService.error("请求失败", "服务器错误"); });
+    this.http.post(Config.SERVER_URL + url, params, options).subscribe(res => { let json: any = res.json(); if (json.result) { this.toastrService.success(json.message, "操作成功"); success(json.datas.id); } else { this.toastrService.warning(json.message, "失败消息"); } }, res => { this.toastrService.error("请求失败", "服务器错误"); });
   }
 
   parse(json: any): string {

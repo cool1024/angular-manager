@@ -53,15 +53,14 @@ export class PermissionComponent implements OnInit {
     this.permission.title = this.update.title;
     this.permission.key = this.update.key;
     this.permission.child_menuid = this.update.child_menuid;
-    this.modalService.open(content, { size: 'sm' }).result.then(
-      (result) => { },
-      (reason) => { }
-    );
+    this.modalService.open(content, { size: 'sm' });
   }
 
   //添加权限
   addPermission() {
-    this.service.add(this.permission, res => {
+    this.permission.parent_menuid = this.permissionArray.menu_id;
+    this.service.add(this.permission, id => {
+      this.permission.id = id;
       this.permissionArray.permissions.push(this.permission);
       this.permission = new Permission();
     });
@@ -69,15 +68,20 @@ export class PermissionComponent implements OnInit {
 
   //移除权限
   removePermission(permissionArray: PermissionArray, permission: Permission) {
-    permissionArray.permissions.splice(permissionArray.permissions.indexOf(permission), 1)
+    this.service.delete(permission.id, () => {
+      permissionArray.permissions.splice(permissionArray.permissions.indexOf(permission), 1)
+    })
   }
 
   //修改权限
   changePermission() {
-    this.update.title = this.permission.title;
-    this.update.child_menuid = this.permission.child_menuid;
-    this.update.key = this.permission.key;
-    this.permission = new Permission();
+    this.permission.id = this.update.id;
+    this.service.change(this.permission, () => {
+      this.update.title = this.permission.title;
+      this.update.child_menuid = this.permission.child_menuid;
+      this.update.key = this.permission.key;
+      this.permission = new Permission();
+    })
   }
 
   //提交权限修改

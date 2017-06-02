@@ -6,12 +6,14 @@ import { Role } from './../../class/role'
 import { Permission, PermissionArray } from './../../class/permission'
 import { RoleService } from './role.service'
 import { PermissionService } from './../permission/permission.service';
+import { RequesterService } from './../../service/requester.service';
+import { StorageService } from './../../service/storage.service';
 
 @Component({
   selector: 'app-role',
   templateUrl: './role.component.html',
   styleUrls: ['./role.component.css'],
-  providers: [RoleService, PermissionService]
+  providers: [RoleService, PermissionService, RequesterService, StorageService]
 })
 export class RoleComponent implements OnInit {
 
@@ -20,6 +22,12 @@ export class RoleComponent implements OnInit {
   ngOnInit() {
 
     //获取权限列表
+    this.permissionService.permissions(datas => {
+      let that = this;
+      datas.forEach(e => {
+        that.permissionArrays.push(new PermissionArray(e.menu_id, e.menu_name, e.menu_ico, e.permissions, e.child_menus));
+      })
+    });
     // this.permissionService.permissions(this.http, datas => {
     //   let that = this;
     //   datas.forEach(e => {

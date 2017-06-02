@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { ToastrService } from 'ngx-toastr';
-import { RequestPost, RequestGet, HtmlPost } from './../../class/request';
+import { RequesterService } from './../../service/requester.service';
 
 @Injectable()
 
 export class RoleService {
 
-  constructor(private toastService: ToastrService) { }
+  constructor(private toastrService: ToastrService, private requesterService: RequesterService) { }
 
   roles(http: Http, success: Function): void {
-    let request = new RequestGet(http);
-    request.message(this.toastService);
-    request.send('/role/list', {}, json => {
-      json.result ? success(json.datas) : this.toastService.warning(json.message, '失败消息');
-    });
+    this.requesterService.get('/role/list', {}, res => success(res.datas));
   }
 
 }

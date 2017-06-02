@@ -39,7 +39,7 @@ export class MenuComponent implements OnInit {
   //弹出子菜单面板
   showMenuPad(menu: Menu, content: any): void {
     this.parent = menu;
-    this.childs = menu.child.concat();
+    this.childs = menu.child;
     this.modalService.open(content, { size: 'lg' });
   }
 
@@ -82,7 +82,8 @@ export class MenuComponent implements OnInit {
     this.menu.parentid = this.parent.id;
     this.service.add(this.menu, id => {
       this.menu.id = id;
-      this.childs.push(this.menu);
+      this.childs.push(new Menu(this.menu.id, this.menu.title, this.menu.parentid, this.menu.url, this.menu.ico, new Array<Menu>()));
+      this.menu = new Menu();
     });
   }
   //删除主菜单
