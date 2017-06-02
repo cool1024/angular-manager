@@ -6,7 +6,7 @@ import { RequestPost, RequestGet, HtmlPost } from './class/request';
 import { Storage } from './class/storage';
 import { Admin } from './class/admin';
 import { Menu } from './class/menu';
-import { AdminService } from './admin/admin.service';
+import { AdminService } from './page/admin/admin.service';
 
 @Injectable()
 
