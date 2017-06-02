@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { Role } from './../class/role'
-import { Permission, PermissionArray } from './../class/permission'
+import { Role } from './../../class/role'
+import { Permission, PermissionArray } from './../../class/permission'
 import { RoleService } from './role.service'
 import { PermissionService } from './../permission/permission.service';
 
@@ -20,12 +20,12 @@ export class RoleComponent implements OnInit {
   ngOnInit() {
 
     //获取权限列表
-    this.permissionService.permissions(this.http, datas => {
-      let that = this;
-      datas.forEach(e => {
-        that.permissionArrays.push(new PermissionArray(e.menu_id, e.menu_name, e.menu_ico, e.permissions, e.child_menus));
-      });
-    });
+    // this.permissionService.permissions(this.http, datas => {
+    //   let that = this;
+    //   datas.forEach(e => {
+    //     that.permissionArrays.push(new PermissionArray(e.menu_id, e.menu_name, e.menu_ico, e.permissions, e.child_menus));
+    //   });
+    // });
 
     //获取所有角色
     this.service.roles(this.http, datas => {

@@ -1,4 +1,4 @@
-<ol class="breadcrumb text-primary">
+<ol class="breadcrumb text-primary rounded-0">
     <li> <a routerLink="" class="fa fa-home"> 首页 </a></li>
     <li> <a class="fa fa-list"> 菜单设置 </a></li>
 </ol>
@@ -12,9 +12,9 @@
                     <ng-template #itemTemplate let-item="item" let-index="index">
                         <i class="{{item.value.ico}}"></i>
                         <span>{{item.value.title}}</span>
-                        <label class="fa fa-edit text-primary" (click)="showChangePad(item.value,change)"></label>
+                        <label class="fa fa-edit text-primary" (click)="showMainChangePad(item.value,change)"></label>
                         <s class="fa fa-plus text-success" (click)="showMenuPad(item.value,child)"></s>
-                        <b class="fa fa-remove text-danger" (click)="removeMenuItem(index)"></b>
+                        <b class="fa fa-remove text-danger" (click)="deleteMainMenu(item.value.id,index)"></b>
                     </ng-template>
                     <bs-sortable [(ngModel)]="menus" [itemTemplate]="itemTemplate" itemClass="sort-item btn border-0 text-left" itemActiveClass="" placeholderItem=新菜单 placeholderClass="card btn btn-outline-info" wrapperClass=""></bs-sortable>
                 </p>
@@ -22,7 +22,7 @@
                 <p class="text-right">
                     <a class="btn btn-link pointer text-info" (click)="showAddPad(parent)"><i class="fa fa-plus"></i> 添加菜单</a>
                     <a class="btn btn-link pointer text-warning" (click)="resetMenu()"><i class="fa fa-refresh"></i> 还原菜单</a>
-                    <a class="btn btn-link pointer text-success" (click)="confirmChange()"><i class="fa fa-check"></i>确认修改</a>
+                    <a class="btn btn-link pointer text-success" (click)="changeMainMenuSort()"><i class="fa fa-check"></i>确认排序</a>
                 </p>
             </div>
         </div>
@@ -54,54 +54,47 @@
     </div>
     <div class="modal-body">
         <div class="col-sm">
-            <!--<div class="input-group">
-                <span class="input-group-btn">
-                    <button class="btn btn-secondary" type="button">菜单名</button>
-                </span>
-                <input type="text" class="form-control" readonly>
-            </div>-->
-            <div>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th class="border-0">标题</th>
-                            <th class="border-0">图标</th>
-                            <th class="border-0">URL</th>
-                            <th class="border-0">操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of childs">
-                            <td>{{item.title}}</td>
-                            <td><i class="{{item.ico}}"></i></td>
-                            <td><a href="{{item.url}}">{{item.url}}</a></td>
-                            <td><button class="btn btn-sm btn-link" (click)="removeMenuItemChild(item)"><i class="fa fa-remove text-danger"></i></button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <form class="row" (ngSubmit)="addMenuItemChild()" #menuChildForm="ngForm">
-                <div class="col-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="border-0">标题</th>
+                        <th class="border-0">图标</th>
+                        <th class="border-0">URL</th>
+                        <th class="border-0">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of childs;index as i">
+                        <td>{{item.title}}</td>
+                        <td><i class="{{item.ico}}"></i></td>
+                        <td><a href="{{item.url}}">{{item.url}}</a></td>
+                        <td>
+                            <button class="btn btn-sm btn-link" (click)="showChildChangePad(item,changechild)"><i class="fa fa-edit text-info"></i></button>
+                            <button class="btn btn-sm btn-link" (click)="deleteChildMenu(item.id,i)"><i class="fa fa-remove text-danger"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm">
+            <form (ngSubmit)="addChildMenu()" class="row" #menuChildForm="ngForm" style="min-width:0px;">
+                <div class="col-sm">
                     <input type="text" name="title" #title="ngModel" [(ngModel)]="menu.title" class="form-control" placeholder="标题" required>
                 </div>
-                <div class="col-2">
+                <div class="col-sm">
                     <input type="text" name="ico" #ico="ngModel" [(ngModel)]="menu.ico" class="form-control" placeholder="图标" required>
                 </div>
-                <div class="col-2">
+                <div class="col-sm">
                     <input type="text" name="url" #url="ngModel" [(ngModel)]="menu.url" class="form-control" placeholder="URL" required>
                 </div>
-                <!--<div class="col-2">
-                    <input type="text" name="key" #key="ngModel" [(ngModel)]="menu.key" class="form-control" placeholder="权限" required>
-                </div>-->
-                <div class="col-2">
+                <div class="col-sm">
                     <button type="text" class="btn btn-success" [disabled]="!menuChildForm.form.valid"><i class="fa fa-plus"></i> 添加子菜单</button>
                 </div>
             </form>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-success" (click)="changeMenuItem();c('Close click')">确认修改</button>
-        <button type="button" class="btn btn-secondary" (click)="c('Close click')">取消/关闭</button>
+        <button type="button" class="btn btn-outline-warning" (click)="c('Close click')">确认/关闭</button>
     </div>
 </ng-template>
 <ng-template #parent let-c="close" let-d="dismiss">
@@ -113,7 +106,7 @@
     </div>
     <div class="modal-body">
         <div class="col-sm">
-            <form (ngSubmit)="addMenu();c('Cross click');" #addForm="ngForm">
+            <form (ngSubmit)="addMainMenu();c('Cross click');" #addForm="ngForm">
                 <div class="input-group">
                     <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button">菜单名</button>
@@ -144,7 +137,7 @@
     </div>
     <div class="modal-body">
         <div class="col-sm">
-            <form (ngSubmit)="changeMenu();c('Cross click');" #changeForm="ngForm">
+            <form (ngSubmit)="changeMainMenu();c('Cross click');" #changeForm="ngForm">
                 <div class="input-group">
                     <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button">菜单名</button>
@@ -161,6 +154,37 @@
                 <br>
                 <div class="text-right">
                     <button class="btn btn-outline-success" [disabled]="!changeForm.form.valid">确认修改</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
+<ng-template #changechild let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">修改子菜单</h5>
+        <button type="button" class="close text-danger" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm">
+            <form (ngSubmit)="changeChildMenu();c('Cross click');" #childForm="ngForm">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">菜单名</button>
+                </span>
+                    <input type="text" class="form-control" placeholder="请输入菜单名称" aria-label="请输入菜单名称" #update_title="ngModel" [(ngModel)]="update.title" name="update_title" required>
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">图标类</button>
+                </span>
+                    <input type="text" class="form-control" placeholder="请输入图标的类名" aria-label="请输入图标的类名" #update_icoe="ngModel" [(ngModel)]="update.ico" name="update_ico" required>
+                </div>
+                <br>
+                <div class="text-right">
+                    <button class="btn btn-outline-success" [disabled]="!childForm.form.valid">确认修改</button>
                 </div>
             </form>
         </div>

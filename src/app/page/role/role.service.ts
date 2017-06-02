@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { ToastrService } from 'ngx-toastr';
-import { RequestPost, RequestGet, HtmlPost } from './../class/request';
+import { RequestPost, RequestGet, HtmlPost } from './../../class/request';
 
 @Injectable()
 

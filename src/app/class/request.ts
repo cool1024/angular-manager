@@ -16,7 +16,7 @@ export class RequestPost {
         headers.append('authorization', Storage.insertToken().account);
         headers.append('content-type', Storage.insertToken().token);
         let options = new RequestOptions({ headers: headers });
-        this.http.post(Config.SERVER_URL + url, params).subscribe(res => { success(res.json()); final() }, res => { this.error(); final(); });
+        this.http.post(Config.SERVER_URL + url, params,options).subscribe(res => { success(res.json()); final() }, res => { this.error(); final(); });
     }
     message(toast: ToastrService): void {
         this.toast = toast;

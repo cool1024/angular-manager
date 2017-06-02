@@ -12,7 +12,7 @@ import { AdminService } from './admin/admin.service';
 
 export class AppService {
 
-  constructor(private toastService: ToastrService, public router: Router) { }
+  constructor(private toastService: ToastrService, public router: Router, public http: Http) { }
 
   //获取用户菜单
   menus(http: Http, success: Function): void {
@@ -50,20 +50,22 @@ export class AppService {
   out(http: Http, callback: Function): void {
     let request = new RequestGet(http);
     request.message(this.toastService);
-    request.send('/admin/out', {}, json => { });
+    request.send('/admin/logout', {}, json => { this.toastService.success("退出成功", "操作成功") });
     Storage.cleanToken();
+    this.router.navigateByUrl('/login');
   }
 
   //数据重载
   reloadApp(http: Http): void {
     let that = this;
+    AppService.menu.splice(0, AppService.menu.length)
     this.checkAuth(http, datas => {
       AppService.admin.id = datas.id;
       AppService.admin.account = datas.account;
     }, () => { that.router.navigateByUrl('/login') });
     this.menus(http, datas => {
       datas.forEach(function (e) {
-        AppService.menu.push(new Menu(e.mainmenu.title, e.mainmenu.ico, e.mainmenu.url, e.level, e.childmenulist));
+        AppService.menu.push(new Menu(e.mainmenu.id, e.mainmenu.title, e.mainmenu.parentid, e.mainmenu.url, e.mainmenu.ico, e.childmenulist));
       });
     });
   }

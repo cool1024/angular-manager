@@ -2,14 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { Permission, PermissionArray } from './../class/permission';
+import { Permission, PermissionArray } from './../../class/permission';
 import { PermissionService } from './permission.service';
+import { RequesterService } from './../../service/requester.service';
+import { StorageService } from './../../service/storage.service';
 
 @Component({
   selector: 'app-permission',
   templateUrl: './permission.component.html',
   styleUrls: ['./permission.component.css'],
-  providers: [PermissionService]
+  providers: [PermissionService, RequesterService, StorageService]
 })
 
 export class PermissionComponent implements OnInit {
@@ -17,10 +19,10 @@ export class PermissionComponent implements OnInit {
   constructor(private modalService: NgbModal, public http: Http, private service: PermissionService) { }
 
   ngOnInit() {
-    this.service.permissions(this.http, datas => {
+    this.service.permissions(datas => {
       let permissions = new Array<PermissionArray>();
       datas.forEach(e => {
-        permissions.push(new PermissionArray(e.menu_id,e.menu_name,e.menu_ico,e.permissions,e.child_menus));
+        permissions.push(new PermissionArray(e.menu_id, e.menu_name, e.menu_ico, e.permissions, e.child_menus));
       });
       this.permissions = permissions;
     });
@@ -30,7 +32,7 @@ export class PermissionComponent implements OnInit {
   public permissions: PermissionArray[];
 
   //活跃状态的权限模块
-  public permissionArray: PermissionArray=new PermissionArray();
+  public permissionArray: PermissionArray = new PermissionArray();
 
   //权限模型
   public permission: Permission = new Permission();
@@ -41,14 +43,11 @@ export class PermissionComponent implements OnInit {
   //弹出添加权限菜单
   showAddPad(permissionArray: PermissionArray, content: any): void {
     this.permissionArray = permissionArray;
-    this.modalService.open(content, { size: 'sm' }).result.then(
-      (result) => { },
-      (reason) => { }
-    );
+    this.modalService.open(content, { size: 'sm' });
   }
 
   //弹出修改权限菜单
-  showChangePad(permissionArray: PermissionArray,permission: Permission, content: any): void {
+  showChangePad(permissionArray: PermissionArray, permission: Permission, content: any): void {
     this.permissionArray = permissionArray;
     this.update = permission;
     this.permission.title = this.update.title;
@@ -62,8 +61,10 @@ export class PermissionComponent implements OnInit {
 
   //添加权限
   addPermission() {
-    this.permissionArray.permissions.push(this.permission);
-    this.permission = new Permission();
+    this.service.add(this.permission, res => {
+      this.permissionArray.permissions.push(this.permission);
+      this.permission = new Permission();
+    });
   }
 
   //移除权限
@@ -80,8 +81,8 @@ export class PermissionComponent implements OnInit {
   }
 
   //提交权限修改
-  confirmPermission(){
-    this.service.change(this.http,{permissions:JSON.stringify(this.permissions)});
+  confirmPermission() {
+    //this.service.change(this.http, { permissions: JSON.stringify(this.permissions) });
   }
 
 }

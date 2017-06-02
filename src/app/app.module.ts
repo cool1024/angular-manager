@@ -11,12 +11,12 @@ import { SortableModule } from 'ngx-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
-import { CenterComponent } from './center/center.component';
-import { MenuComponent } from './menu/menu.component';
-import { PermissionComponent } from './permission/permission.component';
-import { AdminComponent } from './admin/admin.component';
-import { RoleComponent } from './role/role.component';
-import { LoginComponent } from './login/login.component';
+import { CenterComponent } from './page/center/center.component';
+import { MenuComponent } from './page/menu/menu.component';
+import { PermissionComponent } from './page/permission/permission.component';
+import { AdminComponent } from './page/admin/admin.component';
+import { RoleComponent } from './page/role/role.component';
+import { LoginComponent } from './page/login/login.component';
 
 @NgModule({
   declarations: [
