@@ -1,4 +1,4 @@
-<ol class="breadcrumb text-primary">
+<ol class="breadcrumb text-primary rounded-0">
     <li> <a routerLink=""><i class="fa fa-home"></i> 首页 </a></li>
     <li> <a><i class="fa fa-user-circle"></i> 账号管理 </a></li>
 </ol>
@@ -6,36 +6,44 @@
 <div class="row">
     <div class="col-sm">
         <div class="card rounded-0 border-0" style="padding:10px 10px;">
-            <h4><i class="fa fa-user-circle ml-2"></i> 账号列表 <button class="btn btn-outline-success ml-2 pointer" (click)="showAddPad(add)"><i class="fa fa-plus"></i> 添加账号</button></h4>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th class="border-0">ID</th>
-                        <th class="border-0">账号</th>
-                        <th class="border-0">角色</th>
-                        <th class="border-0">创建时间</th>
-                        <th class="border-0">操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of admins">
-                        <th scope="row">{{item.id}}</th>
-                        <td>{{item.account}}</td>
-                        <td>{{item.role.name}}</td>
-                        <td>{{item.createtime}}</td>
-                        <td>
-                            <span class="text-info pointer mr-2" (click)="showChangePad(update)"><i class="fa fa-info"></i> 详情</span>
-                            <span class="text-danger pointer ml-2" (click)="removeAdmin(item)"><i class="fa fa-remove"></i> 删除</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <h4>
+                <i class="fa fa-user-circle ml-2"></i> 账号列表
+                <button class="btn btn-outline-success rounded-0 ml-2 pointer pull-right" (click)="showAddPad(add)"><i class="fa fa-plus"></i> 添加账号</button>
+            </h4>
+            <div class="table-pad">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="border-0">ID</th>
+                            <th class="border-0">账号</th>
+                            <th class="border-0">角色</th>
+                            <th class="border-0">创建时间</th>
+                            <th class="border-0">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of admins">
+                            <th scope="row">{{item.id}}</th>
+                            <td>{{item.account}}</td>
+                            <td>{{item.role.name}}</td>
+                            <td>{{item.createtime}}</td>
+                            <td>
+                                <span class="text-info pointer mr-2" (click)="showChangePad(update,item)"><i class="fa fa-info"></i> 详情</span>
+                                <span class="text-danger pointer ml-2" (click)="removeAdmin(item)"><i class="fa fa-remove"></i> 删除</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <pagination class="pull-right" previousText="上一页" nextText="下一页" firstText="首页" lastText="尾页" [boundaryLinks]="true" [rotate]="false" [maxSize]="5" [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" pageBtnClass="btn"
+                itemsPerPage="{{limilCount}}">
+            </pagination>
         </div>
     </div>
 </div>
 <ng-template #add let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h5 class="modal-title">添加角色</h5>
+        <h5 class="modal-title">添加账号</h5>
         <button type="button" class="close text-danger" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -52,20 +60,56 @@
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">密码</label>
                     <div class="col-10">
-                        <input class="form-control" type="password" value="请输入密码" name="add_passwrod" #add_password="ngModel" [(ngModel)]="temp.password" required>
+                        <input class="form-control" type="text" value="请输入密码" name="add_passwrod" #add_password="ngModel" [(ngModel)]="temp.password" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">角色</label>
                     <div class="col-10">
                         <select class="custom-select rounded-0" name="add_role" #add_role="ngModel" [(ngModel)]="temp.role.id" style="border-bottom-right-radius: .25rem;border-top-right-radius: .25rem;width: 100%;" required>
-                            <option  value="1" selected>超级管理员</option>
-                            <option  value="2">店铺管理员</option>
+                            <option *ngFor="let role of roles" value="{{role.id}}">{{role.name}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="text-right">
                     <button class="btn btn-outline-success" [disabled]="!addForm.form.valid">确认添加</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
+<ng-template #update let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">修改账号</h5>
+        <button type="button" class="close text-danger" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm">
+            <form (ngSubmit)="changeAdmin();c('Cross click');" #changeForm="ngForm">
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label">账号</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" value="{{temp.account}}" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label">密码</label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" placeholder="如不修改密码，此处不填写" name="update_passwrod" #update_password="ngModel" [(ngModel)]="temp.password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label">角色</label>
+                    <div class="col-10">
+                        <select class="custom-select rounded-0" name="update_role" #update_role="ngModel" [(ngModel)]="temp.role.id" style="border-bottom-right-radius: .25rem;border-top-right-radius: .25rem;width: 100%;" required>
+                            <option *ngFor="let role of roles" value="{{role.id}}">{{role.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <button class="btn btn-outline-success" [disabled]="!changeForm.form.valid">确认添加</button>
                 </div>
             </form>
         </div>

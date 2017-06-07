@@ -15,20 +15,20 @@ export class AppService {
   constructor(private toastService: ToastrService, public router: Router, public http: Http) { }
 
   //获取用户菜单
-  menus(http: Http, success: Function): void {
-    let request = new RequestGet(http);
+  menus(success: Function): void {
+    let request = new RequestGet(this.http);
     request.message(this.toastService);
-    request.send('/menu/list', {}, json => {
+    request.send('/admin/dynamicmenu', {}, json => {
       json.result ? success(json.datas) : this.toastService.warning(json.message, "失败消息");
     });
   }
 
   //校验用户登入
-  checkAuth(http: Http, success: Function, error?: Function): void {
+  checkAuth(success: Function, error?: Function): void {
     var error: Function = error || function () { };
     //校验本地数据
     if (Storage.checkToken()) {
-      let request = new RequestGet(http, error);
+      let request = new RequestGet(this.http, error);
       request.message(this.toastService);
       request.send('/admin/info', {}, json => { json.result ? success(json.datas) : error(); }, );
     }
@@ -56,14 +56,24 @@ export class AppService {
   }
 
   //数据重载
-  reloadApp(http: Http): void {
+  reloadApp(): void {
     let that = this;
     AppService.menu.splice(0, AppService.menu.length)
-    this.checkAuth(http, datas => {
+    this.checkAuth(datas => {
       AppService.admin.id = datas.id;
       AppService.admin.account = datas.account;
     }, () => { that.router.navigateByUrl('/login') });
-    this.menus(http, datas => {
+    this.menus(datas => {
+      datas.forEach(function (e) {
+        AppService.menu.push(new Menu(e.mainmenu.id, e.mainmenu.title, e.mainmenu.parentid, e.mainmenu.url, e.mainmenu.ico, e.childmenulist));
+      });
+    });
+  }
+
+  //菜单载入
+  loadMenus(): void {
+    AppService.menu.splice(0, AppService.menu.length);
+    this.menus(datas => {
       datas.forEach(function (e) {
         AppService.menu.push(new Menu(e.mainmenu.id, e.mainmenu.title, e.mainmenu.parentid, e.mainmenu.url, e.mainmenu.ico, e.childmenulist));
       });

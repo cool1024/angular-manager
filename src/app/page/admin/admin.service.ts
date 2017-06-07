@@ -3,24 +3,32 @@ import { Http } from '@angular/http';
 import { ToastrService } from 'ngx-toastr';
 import { RequestPost, RequestGet, HtmlPost } from './../../class/request';
 import { Admin } from './../../class/admin';
+import { RequesterService } from './../../service/requester.service';
+import { StorageService } from './../../service/storage.service';
 
 @Injectable()
 
 export class AdminService {
 
-  constructor(private toastService: ToastrService) { }
+  constructor(private toastService: ToastrService, private requesterService: RequesterService, private http: Http) { }
 
   //添加新账号
-  add(http: Http, admin: Admin, success: Function, error: Function): void {
-    let reqeust = new RequestPost(http);
-    reqeust.message(this.toastService);
-    reqeust.send('/admin/add', { account: admin.account, password: admin.password }, json => { json.result ? success() : this.toastService.warning(json.message, "失败消息"); });
+  add(admin: Admin, success: Function): void {
+    this.requesterService.add('/admin/add', { account: admin.account, password: admin.password, role: admin.role.id }, success);
   }
 
   //获取所有账号
-  list(http: Http, success: Function): void {
-    let reqeust = new RequestGet(http);
-    reqeust.message(this.toastService);
-    reqeust.send('/admin/list', {}, json => { json.result ? success(json.datas) : this.toastService.warning(json.message, "失败消息"); });
+  list(success: Function, params: any): void {
+    this.requesterService.list('/admin/list', params, success);
+  }
+
+  //修改账号
+  change(admin: Admin, success: Function): void {
+    this.requesterService.update('/admin/update', { id: admin.id, password: admin.password, role: admin.role.id }, success);
+  }
+
+  //删除账号
+  delete(id:number,success:Function):void{
+    this.requesterService.delete('/admin/delete',{id:id},success);
   }
 }

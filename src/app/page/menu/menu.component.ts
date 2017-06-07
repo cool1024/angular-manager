@@ -4,17 +4,18 @@ import { Http } from '@angular/http';
 import { ToastrService } from 'ngx-toastr';
 import { Menu } from './../../class/menu';
 import { MenuService } from './menu.service';
+import { AppService } from './../../app.service';
 import { RequesterService } from './../../service/requester.service';
 import { StorageService } from './../../service/storage.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
-  providers: [MenuService, RequesterService, StorageService]
+  providers: [MenuService, RequesterService, StorageService, AppService]
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, public http: Http, private service: MenuService) { }
+  constructor(private modalService: NgbModal, public http: Http, private service: MenuService, private appService: AppService) { }
 
   ngOnInit() { this.loadMenu(); }
 
@@ -138,4 +139,6 @@ export class MenuComponent implements OnInit {
     });
   }
 
+  //刷新系统菜单
+  flashMenu(): void { this.appService.loadMenus(); }
 }

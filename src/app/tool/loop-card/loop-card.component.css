@@ -1,0 +1,18 @@
+.card {
+    width: 20rem;
+}
+
+.card-div-img {
+    height: 10rem;
+    line-height: 10rem;
+}
+
+.card-div-img img {
+    height: 100%;
+    width: 100%;
+}
+
+.card hr {
+    width: 95%;
+    margin: auto;
+}

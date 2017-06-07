@@ -59,7 +59,7 @@
 }
 
 .bg {
-    background-color: rgba(10, 10, 10, 0.61);
+    background-color: rgba(110, 110, 110, 0.6);
     color: white;
 }
 
@@ -72,6 +72,11 @@
     background-color: rgba(255, 255, 255, 0.2);
     width: 90%;
     margin: auto;
+}
+
+.ab-right {
+    position: absolute;
+    right: 10px;
 }
 
 a,
@@ -231,4 +236,32 @@ body {
 
 .pointer {
     cursor: pointer;
+}
+
+.table-pad {
+    height: 550px !important;
+}
+
+
+/*bootstrap css*/
+
+.btn:focus {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.font-1 {
+    font-size: 10px;
+}
+
+.font-2 {
+    font-size: 20px;
+}
+
+.font-3 {
+    font-size: 25px;
 }

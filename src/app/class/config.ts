@@ -14,7 +14,7 @@ export class Config {
         //系统版本
         version: "1.0.0",
         //主题背景
-        bg_color: "rgba(10, 10, 10, 0.61)",
+        bg_color: "rgba(110, 110, 110, 0.6)",
         //字体颜色
         font_color: "white"
     }

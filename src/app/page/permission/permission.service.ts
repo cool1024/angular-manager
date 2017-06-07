@@ -32,5 +32,14 @@ export class PermissionService {
     this.requesterService.delete('/permission/delete', { id: id }, res => success());
   }
 
+  gets(ids:number[],list:Permission[]):Permission[]{
+    let permissions:Permission[]=new Array<Permission>();
+    ids.forEach(id=>{
+      list.forEach(pem=>{
+        if(pem.id=id){permissions.push(pem)}
+      });
+    });
+    return permissions;
+  }
 
 }

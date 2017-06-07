@@ -7,9 +7,12 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdButtonModule, MdMenuModule, MdGridListModule, MdCheckboxModule } from '@angular/material';
 import 'hammerjs';
-import { SortableModule } from 'ngx-bootstrap';
+import { SortableModule,PaginationModule  } from 'ngx-bootstrap';
+import { Ng2TableModule } from 'ng2-table/ng2-table';
+import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, NgTableSortingDirective } from 'ng2-table/ng2-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
+import { SelectModule } from 'ng2-select';
 import { AppComponent } from './app.component';
 import { CenterComponent } from './page/center/center.component';
 import { MenuComponent } from './page/menu/menu.component';
@@ -17,6 +20,10 @@ import { PermissionComponent } from './page/permission/permission.component';
 import { AdminComponent } from './page/admin/admin.component';
 import { RoleComponent } from './page/role/role.component';
 import { LoginComponent } from './page/login/login.component';
+import { RoleParentPipe } from './pipe/role-parent.pipe';
+import { RoleForComponent } from './page/role/role-for.component';
+import { LoopCardComponent } from './tool/loop-card/loop-card.component';
+import { ToolComponent } from './page/tool/tool.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +34,10 @@ import { LoginComponent } from './page/login/login.component';
     AdminComponent,
     RoleComponent,
     LoginComponent,
+    RoleParentPipe,
+    RoleForComponent,
+    LoopCardComponent,
+    ToolComponent,
   ],
   imports: [
     RouterModule.forRoot([
@@ -36,10 +47,12 @@ import { LoginComponent } from './page/login/login.component';
       { path: 'permission', component: PermissionComponent },
       { path: 'admin', component: AdminComponent },
       { path: 'role', component: RoleComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
+      { path: 'tool', component: ToolComponent }
     ]),
     NgbModule.forRoot(),
     SortableModule.forRoot(),
+    PaginationModule.forRoot(),
     ToastrModule.forRoot({ timeOut: 1000, positionClass: 'toast-bottom-right' }),
     BrowserModule,
     FormsModule,
@@ -50,6 +63,8 @@ import { LoginComponent } from './page/login/login.component';
     MdGridListModule,
     MdCheckboxModule,
     CommonModule,
+    SelectModule,
+    Ng2TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

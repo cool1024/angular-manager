@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   public admin: Admin = new Admin();
 
   doLogin() {
-    this.service.login(this.admin, () => { this.router.navigateByUrl('/center'); this.appService.reloadApp(this.http); }, msg => this.message = msg);
+    this.service.login(this.admin, () => { this.router.navigateByUrl('/center'); this.appService.reloadApp(); }, msg => this.message = msg);
   }
 
 }

@@ -29,10 +29,10 @@ export class AppComponent implements OnInit {
   public isMenuPadShow: boolean = true;
 
   //菜单列表
-  public menus: Menu[]=AppService.menu;
+  public menus: Menu[] = AppService.menu;
 
   //当前登入的管理员
-  public admin: Admin=AppService.admin;
+  public admin: Admin = AppService.admin;
 
   //管理员修改面板数据
   public temp: Admin = new Admin();
@@ -43,19 +43,18 @@ export class AppComponent implements OnInit {
   //资源路径
   public source = Config.SOURCE_URL;
 
-  constructor(private ngbModal: NgbModal, public service: AppService, public http: Http, public router: Router) {}
+  constructor(private ngbModal: NgbModal, public service: AppService, public http: Http, public router: Router) { }
 
   ngOnInit() {
 
-    let that=this;
-    this.service.reloadApp(this.http);
+    this.service.reloadApp();
     //this.service.reloadApp(this.http);
     // //校验登入
     // this.service.checkAuth(this.http, info => {
     //   this.isMenuPadShow = true;
     //   this.admin.account = info.account;
     //   this.admin.thumb = info.thumb;
-    // }, () => this.router.navigateByUrl('/login'))
+    // }, () => this.router.navigateByUrl('/login'))ng 
 
     // //载入菜单
     // let isCollapsed = new Array<boolean>(false);
@@ -87,5 +86,12 @@ export class AppComponent implements OnInit {
     this.service.out(this.http, () => {
       this.admin = new Admin();
     })
+  }
+
+  //折叠菜单
+  collapseClose(index: number): void {
+    for (let i: number = 1; i < this.isCollapsed.length - 1; i++) {
+      if (i != index) this.isCollapsed[i] = false;
+    }
   }
 }
