@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -7,11 +6,14 @@ import { AppService } from './app.service';
 import { Menu } from './class/menu';
 import { Admin } from './class/admin';
 import { Config } from './class/config';
+import { RequesterService } from './service/requester.service';
+import { StorageService } from './service/storage.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [AppService]
+  providers: [AppService,RequesterService,StorageService]
 
 })
 export class AppComponent implements OnInit {
@@ -43,28 +45,10 @@ export class AppComponent implements OnInit {
   //资源路径
   public source = Config.SOURCE_URL;
 
-  constructor(private ngbModal: NgbModal, public service: AppService, public http: Http, public router: Router) { }
+  constructor(private ngbModal: NgbModal, public service: AppService, public router: Router) { }
 
   ngOnInit() {
-
     this.service.reloadApp();
-    //this.service.reloadApp(this.http);
-    // //校验登入
-    // this.service.checkAuth(this.http, info => {
-    //   this.isMenuPadShow = true;
-    //   this.admin.account = info.account;
-    //   this.admin.thumb = info.thumb;
-    // }, () => this.router.navigateByUrl('/login'))ng 
-
-    // //载入菜单
-    // let isCollapsed = new Array<boolean>(false);
-    // this.service.menus(this.http, datas => {
-    //   datas.forEach(function (e) {
-    //     that.menus.push(new Menu(e.mainmenu.title, e.mainmenu.ico, e.mainmenu.url, e.level, e.childmenulist));
-    //     isCollapsed.push(false);
-    //   });
-    //   this.isCollapsed = isCollapsed;
-    // });
   }
 
   //弹出管理员信息面板
@@ -75,7 +59,7 @@ export class AppComponent implements OnInit {
 
   //修改管理员信息
   changeAdminInfo(): void {
-    this.service.changeAdminInfo(this.http, this.temp, () => {
+    this.service.changeAdminInfo(this.temp, () => {
       this.admin = this.temp;
       this.temp = new Admin();
     })
@@ -83,7 +67,7 @@ export class AppComponent implements OnInit {
 
   //退出登入
   signOut(): void {
-    this.service.out(this.http, () => {
+    this.service.out(() => {
       this.admin = new Admin();
     })
   }

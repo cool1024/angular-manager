@@ -8,8 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdButtonModule, MdMenuModule, MdGridListModule, MdCheckboxModule } from '@angular/material';
 import 'hammerjs';
 import { SortableModule,PaginationModule  } from 'ngx-bootstrap';
-import { Ng2TableModule } from 'ng2-table/ng2-table';
-import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, NgTableSortingDirective } from 'ng2-table/ng2-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { SelectModule } from 'ng2-select';
@@ -64,7 +62,6 @@ import { ToolComponent } from './page/tool/tool.component';
     MdCheckboxModule,
     CommonModule,
     SelectModule,
-    Ng2TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
