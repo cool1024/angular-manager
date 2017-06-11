@@ -59,6 +59,7 @@ export class AppService {
     this.checkAuth(datas => {
       AppService.admin.id = datas.id;
       AppService.admin.account = datas.account;
+      AppService.admin.role.name=datas.role;
     }, () => { that.router.navigateByUrl('/login') });
     this.menus(datas => {
       datas.forEach(function (e) {

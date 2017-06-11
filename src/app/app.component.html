@@ -10,7 +10,7 @@
         </div>
         <div class="menu-block-list" *ngIf="isCollapsed[0]">
             <a>
-                <div><i class="fa  fa-user-md"></i> <span>超级管理员</span></div>
+                <div><i class="fa  fa-user-md"></i> <span>{{admin.role.name}}</span></div>
             </a>
             <a (click)="showAdminInfo(content)">
                 <div><i class="fa  fa-info-circle"></i> <span>账户设置</span></div>
@@ -38,7 +38,7 @@
     <div class="top-menu" *ngIf="isMenuPadShow">
         <div class="left-tool-button">
             <div class="circle-button text-center" (click)="isMenuSmall=!isMenuSmall"><i class="fa  fa-navicon"></i></div>
-            <h5 class="circle-text"> Dashboard</h5>
+            <!--<h5 class="circle-text"> Dashboard</h5>-->
         </div>
         <div class="right-tool-bur">
             <div class="input-list"><input type="search" /></div>

@@ -1,7 +1,7 @@
 export class Config {
 
     //服务器地址
-    public static SERVER_URL = "http://www.zswsswh.top";
+    public static SERVER_URL = "http://127.0.0.1";
 
     public static SOURCE_URL = "http://www.zswsswh.top";
 

@@ -51,8 +51,6 @@ export class RoleComponent implements OnInit {
         }
         if (this.roles[i].parent == undefined) this.roles[i].parent = new Role();
       }
-
-      console.log(this.roles);
     });
   }
 
