@@ -2,18 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { LoopCard } from './../../tool/loop-card/loopcard';
 import { RequesterService } from './../../service/requester.service';
 import { StorageService } from './../../service/storage.service';
+import { LoopsService } from './loops.service';
 
 @Component({
   selector: 'app-tool',
   templateUrl: './tool.component.html',
   styleUrls: ['./tool.component.css'],
-  providers: [RequesterService, StorageService]
+  providers: [RequesterService, StorageService, LoopsService]
 })
 export class ToolComponent implements OnInit {
 
   public loopCards: LoopCard[];
 
-  constructor(private requesterService: RequesterService) { }
+  constructor(private loopsService: LoopsService) { }
 
   ngOnInit() {
 
@@ -23,12 +24,16 @@ export class ToolComponent implements OnInit {
 
   }
 
-  saveLoopCard(card: any): void {
-    this.requesterService.upload('/test', [{ key: 'image', file: card.file }], { param_one: 1, params_two: 2 });
+  saveLoopCard(card: LoopCard): void {
+    this.loopsService.add(card, url => {
+      card.image = url;
+      card.base64 = "";
+      card.file = null;
+    });
     card.status = true;
   }
 
-  deleteLoopCard(card: any): void {
+  deleteLoopCard(card: LoopCard): void {
     this.loopCards.splice(this.loopCards.indexOf(card), 1);
   }
 

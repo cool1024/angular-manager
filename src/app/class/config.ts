@@ -3,7 +3,8 @@ export class Config {
     //服务器地址
     public static SERVER_URL = "http://127.0.0.1";
 
-    public static SOURCE_URL = "http://www.zswsswh.top";
+    //资源访问地址
+    public static SOURCE_URL = "http://127.0.0.1";
 
     //系统配置
     public static SYSTEM_SETTING = {

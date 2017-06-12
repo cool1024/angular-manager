@@ -12,7 +12,7 @@ export class RequesterService {
 
   //数据提交
   post(url: string, params: any, success: Function = new Function(), final: Function = new Function()): void {
-    let options: RequestOptions = new RequestOptions({ headers: this.getHeaders() });
+    let options: RequestOptions = new RequestOptions(this.getHeaders());
     this.http.post(Config.SERVER_URL + url, params, options).subscribe(res => { success(res.json()); final() }, res => { this.toastrService.error("请求失败", "服务器错误"); final(); });
   }
 
@@ -65,9 +65,12 @@ export class RequesterService {
   upload(url: string, files: { key: string, file: Blob }[], params: {}, success?: Function, doing: Function = new Function()): void {
     let requester: XMLHttpRequest = new XMLHttpRequest();
     let formData: FormData = new FormData();
+    let token: Token = this.storageService.getToken();
     for (var key in params) formData.append(key, params[key]);
     for (var key in files) formData.append(files[key].key, files[key].file);
-    requester.open('post', url, true);
+    requester.open('post', Config.SERVER_URL + url, true);
+    requester.setRequestHeader('ng-params-one', token.account);
+    requester.setRequestHeader('ng-params-two', token.token);
     requester.addEventListener('error', () => this.toastrService.error("请求失败"));
     requester.addEventListener('progress', e => doing(Math.round(e.loaded * 100 / e.total)));
     requester.addEventListener('load', e => { (requester.readyState == 4 && requester.status == 200) ? success(JSON.parse(requester.responseText)) : this.toastrService.warning("数据传输异常") });
