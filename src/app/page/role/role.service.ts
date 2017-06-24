@@ -11,7 +11,7 @@ export class RoleService {
   constructor(private toastrService: ToastrService, private requesterService: RequesterService) { }
 
   roles(success: Function): void {
-    this.requesterService.get('/role/list', {}, res => success(res.datas));
+    this.requesterService.list('/role/list', {}, success);
   }
 
   add(role: Role, success: Function): void {

@@ -1,0 +1,6 @@
+<div class="card">
+  <div class="card-header">卡片测试 <span class="pull-right pointer" (click)="addCard()"><i class="fa fa-plus"></i> 添加卡片</span></div>
+  <div class="card-block">
+    <app-loop-card *ngFor="let card of loopCards" [loopCard]="card" (onClose)="deleteLoopCard(card)" (onSave)="saveLoopCard(card)"></app-loop-card>
+  </div>
+</div>

@@ -3,13 +3,12 @@ export class Config {
     //服务器地址
     public static SERVER_URL = "http://127.0.0.1";
 
-    //资源访问地址
     public static SOURCE_URL = "http://127.0.0.1";
 
     //系统配置
     public static SYSTEM_SETTING = {
         //系统标题
-        title: "Anas权限管理平台",
+        title: "Anas管理系统",
         //系统图标
         ico: "fa fa-yelp",
         //系统版本

@@ -8,16 +8,15 @@
         <div class="card rounded-0">
             <div class="card-block">
                 <h5 class="card-title">系统菜单</h5>
-                <p class="card-text">
-                    <ng-template #itemTemplate let-item="item" let-index="index">
-                        <i class="{{item.value.ico}}"></i>
-                        <span>{{item.value.title}}</span>
-                        <label class="fa fa-edit text-primary" (click)="showMainChangePad(item.value,change)"></label>
-                        <s class="fa fa-plus text-success" (click)="showMenuPad(item.value,child)"></s>
-                        <b class="fa fa-remove text-danger" (click)="deleteMainMenu(item.value.id,index)"></b>
-                    </ng-template>
-                    <bs-sortable [(ngModel)]="menus" [itemTemplate]="itemTemplate" itemClass="sort-item btn border-0 text-left" itemActiveClass="" placeholderItem=新菜单 placeholderClass="card btn btn-outline-info" wrapperClass=""></bs-sortable>
-                </p>
+                <div [sortablejs]="menus">
+                    <p *ngFor="let item of menus;index as i;">
+                        <i class="{{item.ico}}"></i>
+                        <span>{{item.title}}</span>
+                        <button class="btn btn-link btn-sm  text-primary pull-right" (click)="showMainChangePad(item,change)"><i class="fa fa-edit" ></i></button>
+                        <button class="btn btn-link btn-sm  text-success pull-right" (click)="showMenuPad(item,child)"><i class="fa fa-plus" ></i></button>
+                        <button class="btn btn-link btn-sm  text-danger pull-right" (click)="deleteMainMenu(item.id,i)"><i class="fa fa-remove" ></i></button>
+                    </p>
+                </div>
                 <hr>
                 <p class="text-right">
                     <a class="btn btn-link pointer text-info" (click)="showAddPad(parent)"><i class="fa fa-plus"></i> 添加菜单</a>
@@ -111,14 +110,16 @@
                     <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button">菜单名</button>
                 </span>
-                    <input type="text" class="form-control" placeholder="请输入菜单名称" aria-label="请输入菜单名称" #add_title="ngModel" [(ngModel)]="add.title" name="add_title" required>
+                    <input type="text" class="form-control" placeholder="请输入菜单名称" aria-label="请输入菜单名称" #add_title="ngModel" [(ngModel)]="add.title"
+                        name="add_title" required>
                 </div>
                 <br>
                 <div class="input-group">
                     <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button">图标类</button>
                 </span>
-                    <input type="text" class="form-control" placeholder="请输入图标的类名" aria-label="请输入图标的类名" #add_ico="ngModel" [(ngModel)]="add.ico" name="add_ico" required>
+                    <input type="text" class="form-control" placeholder="请输入图标的类名" aria-label="请输入图标的类名" #add_ico="ngModel" [(ngModel)]="add.ico"
+                        name="add_ico" required>
                 </div>
                 <br>
                 <div class="text-right">
@@ -142,14 +143,16 @@
                     <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button">菜单名</button>
                 </span>
-                    <input type="text" class="form-control" placeholder="请输入菜单名称" aria-label="请输入菜单名称" #update_title="ngModel" [(ngModel)]="update.title" name="update_title" required>
+                    <input type="text" class="form-control" placeholder="请输入菜单名称" aria-label="请输入菜单名称" #update_title="ngModel" [(ngModel)]="update.title"
+                        name="update_title" required>
                 </div>
                 <br>
                 <div class="input-group">
                     <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button">图标类</button>
                 </span>
-                    <input type="text" class="form-control" placeholder="请输入图标的类名" aria-label="请输入图标的类名" #update_icoe="ngModel" [(ngModel)]="update.ico" name="update_ico" required>
+                    <input type="text" class="form-control" placeholder="请输入图标的类名" aria-label="请输入图标的类名" #update_icoe="ngModel" [(ngModel)]="update.ico"
+                        name="update_ico" required>
                 </div>
                 <br>
                 <div class="text-right">
@@ -173,14 +176,24 @@
                     <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button">菜单名</button>
                 </span>
-                    <input type="text" class="form-control" placeholder="请输入菜单名称" aria-label="请输入菜单名称" #update_title="ngModel" [(ngModel)]="update.title" name="update_title" required>
+                    <input type="text" class="form-control" placeholder="请输入菜单名称" aria-label="请输入菜单名称" #update_title="ngModel" [(ngModel)]="update.title"
+                        name="update_title" required>
                 </div>
                 <br>
                 <div class="input-group">
                     <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button">图标类</button>
                 </span>
-                    <input type="text" class="form-control" placeholder="请输入图标的类名" aria-label="请输入图标的类名" #update_icoe="ngModel" [(ngModel)]="update.ico" name="update_ico" required>
+                    <input type="text" class="form-control" placeholder="请输入图标的类名" aria-label="请输入图标的类名" #update_ico="ngModel" [(ngModel)]="update.ico"
+                        name="update_ico" required>
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">URL</button>
+                </span>
+                    <input type="text" class="form-control" placeholder="请输入URL" aria-label="请输入图标的类名" #update_url="ngModel" [(ngModel)]="update.url"
+                        name="update_url" required>
                 </div>
                 <br>
                 <div class="text-right">

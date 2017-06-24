@@ -1,0 +1,7 @@
+<div class="card rounded-0">
+  <div class="card-header">图片上传示例</div>
+  <div class="card-block">
+    <app-input-image [config]="config" [image]="image" [title]="'单图上传'" (onChange)="images=$event"></app-input-image>
+    <app-input-images [config]="config" [images]="images" [title]="'多图上传'" (onChange)="image=$event"></app-input-images>
+  </div>
+</div>

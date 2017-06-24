@@ -68,7 +68,8 @@ export class AppComponent implements OnInit {
   //退出登入
   signOut(): void {
     this.service.out(() => {
-      this.admin = new Admin();
+      this.admin.account="";
+      this.admin.role.name="";
     })
   }
 

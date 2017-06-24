@@ -12,9 +12,7 @@ export class PermissionService {
 
   //获取权限列表
   permissions(success: Function): void {
-    this.requesterService.get('/permission/list', {}, res => {
-      res.result ? success(res.datas) : this.toastrService.warning(res.message, "失败消息");
-    });
+    this.requesterService.list('/permission/list', {}, success);
   }
 
   //修改指定权限
@@ -32,11 +30,11 @@ export class PermissionService {
     this.requesterService.delete('/permission/delete', { id: id }, res => success());
   }
 
-  gets(ids:number[],list:Permission[]):Permission[]{
-    let permissions:Permission[]=new Array<Permission>();
-    ids.forEach(id=>{
-      list.forEach(pem=>{
-        if(pem.id=id){permissions.push(pem)}
+  gets(ids: number[], list: Permission[]): Permission[] {
+    let permissions: Permission[] = new Array<Permission>();
+    ids.forEach(id => {
+      list.forEach(pem => {
+        if (pem.id = id) { permissions.push(pem) }
       });
     });
     return permissions;

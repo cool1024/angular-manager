@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { RequestPost, RequestGet, HtmlPost } from './class/request';
 import { Storage } from './class/storage';
 import { Admin } from './class/admin';
 import { Menu } from './class/menu';
@@ -28,7 +27,6 @@ export class AppService {
     //校验本地数据
     if (Storage.checkToken()) {
       this.requesteServicer.get('/admin/info', {}, res => { res.result ? success(res.datas) : error(); })
-      let request = new RequestGet(this.http, error);
     }
     else {
       error();

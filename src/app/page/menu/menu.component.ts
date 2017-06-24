@@ -116,6 +116,7 @@ export class MenuComponent implements OnInit {
     this.service.change(this.update, () => {
       this.update.child[0].title = this.update.title;
       this.update.child[0].ico = this.update.ico;
+      this.update.child[0].url=this.update.url;
     });
   }
 

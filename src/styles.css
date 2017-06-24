@@ -239,7 +239,7 @@ body {
 }
 
 .table-pad {
-    height: 550px !important;
+    min-height: 550px !important;
 }
 
 
@@ -259,9 +259,25 @@ body {
 }
 
 .font-2 {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .font-3 {
+    font-size: 20px;
+}
+
+.font-4 {
     font-size: 25px;
+}
+
+
+/*ng2-select css*/
+
+.ui-select-container .dropdown-menu {
+    display: block !important;
+}
+
+.select-item {
+    height: 22px;
+    width: 22px;
 }

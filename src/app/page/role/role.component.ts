@@ -30,8 +30,6 @@ export class RoleComponent implements OnInit {
       })
     });
 
-    //获取所有权限
-
     //获取所有角色
     this.service.roles(datas => {
       let that = this;
