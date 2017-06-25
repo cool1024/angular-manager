@@ -32,6 +32,8 @@ import { TableDemoComponent } from './page/tool/table-demo/table-demo.component'
 import { ImageDemoComponent } from './page/tool/image-demo/image-demo.component';
 import { ImagesDemoComponent } from './page/tool/images-demo/images-demo.component';
 import { CardDemoComponent } from './page/tool/card-demo/card-demo.component';
+import { AlertDemoComponent } from './page/tool/alert-demo/alert-demo.component';
+import { FormDomComponent } from './page/tool/form-dom/form-dom.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,9 @@ import { CardDemoComponent } from './page/tool/card-demo/card-demo.component';
     CardDemoComponent,
     InputImagesComponent,
     InputImageComponent,
+    ModalWindowComponent,
+    AlertDemoComponent,
+    FormDomComponent,
   ],
   imports: [
     RouterModule.forRoot([
@@ -68,6 +73,8 @@ import { CardDemoComponent } from './page/tool/card-demo/card-demo.component';
       { path: 'tool/table', component: TableDemoComponent },
       { path: 'tool/inputimage', component: ImageDemoComponent },
       { path: 'tool/loopcard', component: CardDemoComponent },
+      { path: 'tool/alert', component: AlertDemoComponent },
+      { path: 'tool/form', component: FormDomComponent },
 
       { path: '**', component: ErrorComponent },//此链接必须放置在最后
     ]),
